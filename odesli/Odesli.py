@@ -23,9 +23,9 @@ class Odesli():
         result = json.loads(requestResult.content.decode())
         resultType = next(iter(result['entitiesByUniqueId'].values()))['type']
         if resultType == 'song':
-            return await SongResult.parse(result)
+            return SongResult.parse(result)
         elif resultType == 'album':
-            return await AlbumResult.parse(result)
+            return AlbumResult.parse(result)
         else:
             raise NotImplementedError(f'Entities with type {resultType} are not supported yet.')
 
