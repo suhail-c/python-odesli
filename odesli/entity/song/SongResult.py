@@ -21,5 +21,5 @@ class SongResult(EntityResult):
 
     @staticmethod
     async def parse(result) -> SongResult:
-        return await SongResult(*super(SongResult, SongResult).parse(result, Song))
+        return SongResult(*super(SongResult, SongResult).parse(result, Song))
 
