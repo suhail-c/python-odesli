@@ -18,7 +18,7 @@ class Odesli():
         if not self.key == None:
             params['key'] = self.key
         async with httpx.AsyncClient() as client:
-            requestResult = await client.get(f'{ROOT}/{LINKS_ENDPOINT}', params=params)
+            requestResult = await client.get(f'{ROOT}/{LINKS_ENDPOINT}', params=params, timeout=30)
         await requestResult.raise_for_status()
         result = json.loads(requestResult.content.decode())
         resultType = next(iter(result['entitiesByUniqueId'].values()))['type']
