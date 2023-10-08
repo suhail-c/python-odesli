@@ -20,6 +20,6 @@ class AlbumResult(EntityResult):
         self.albumsByProvider = albumsByProvider
 
     @staticmethod
-    def parse(result) -> AlbumResult:
-        return AlbumResult(*super(AlbumResult, AlbumResult).parse(result, Album))
+    async def parse(result) -> AlbumResult:
+        return await AlbumResult(*super(AlbumResult, AlbumResult).parse(result, Album))
 
