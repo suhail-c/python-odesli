@@ -14,12 +14,12 @@ class Odesli():
     def __init__(self, key=None):
         self.key = key
 
-    async def __get(self, params) -> EntityResult:
+    def __get(self, params) -> EntityResult:
         if not self.key == None:
             params['key'] = self.key
         async with httpx.AsyncClient() as client:
             requestResult = await client.get(f'{ROOT}/{LINKS_ENDPOINT}', params=params)
-        await requestResult.raise_for_status()
+            await requestResult.raise_for_status()
         result = json.loads(requestResult.content.decode())
         resultType = next(iter(result['entitiesByUniqueId'].values()))['type']
         if resultType == 'song':
@@ -30,11 +30,11 @@ class Odesli():
             raise NotImplementedError(f'Entities with type {resultType} are not supported yet.')
 
 
-    async def getByUrl(self, url) -> EntityResult:
-        return await self.__get({ 'url': url })
+    def getByUrl(self, url) -> EntityResult:
+        return self.__get({ 'url': url })
 
-    async def getById(self, id, platform, type) -> EntityResult:
-        return await self.__get({
+    def getById(self, id, platform, type) -> EntityResult:
+        return self.__get({
             'id': id,
             'platform': platform,
             'type': type
