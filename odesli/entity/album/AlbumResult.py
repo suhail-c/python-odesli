@@ -21,5 +21,5 @@ class AlbumResult(EntityResult):
 
     @staticmethod
     async def parse(result) -> AlbumResult:
-        return await AlbumResult(*super(AlbumResult, AlbumResult).parse(result, Album))
+        return AlbumResult(*super(AlbumResult, AlbumResult).parse(result, Album))
 
